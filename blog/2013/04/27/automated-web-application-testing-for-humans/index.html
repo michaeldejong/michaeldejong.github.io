@@ -1,44 +1,103 @@
-<?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[Minicom.nl]]></title>
-  <link href="http://michaeldejong.github.io/atom.xml" rel="self"/>
-  <link href="http://michaeldejong.github.io/"/>
-  <updated>2014-09-18T22:00:19-07:00</updated>
-  <id>http://michaeldejong.github.io/</id>
-  <author>
-    <name><![CDATA[Michael de Jong]]></name>
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Automated web application testing for humans - Minicom.nl</title>
+  <meta name="author" content="Michael de Jong">
+
+  
+  <meta name="description" content="Web applications have become a very popular breed of software. The fact that the software needed to use a web application is already installed on &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://michaeldejong.github.io/blog/2013/04/27/automated-web-application-testing-for-humans">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/atom.xml" rel="alternate" title="Minicom.nl" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href='http://fonts.googleapis.com/css?family=Quattrocento+Sans|Roboto:400,300' rel='stylesheet' type='text/css'>
+
+  
+
+</head>
+
+
+<body>
+	<div class="container">
+		<aside class="left">
+			<div class="inner-left">
+				<header>
+					
+  <img src="http://www.gravatar.com/avatar/e8fe8655c9bacb09f19065f1d2559259?s=200" alt="Gravatar of Michael de Jong " title="Gravatar of Michael de Jong" class="profilepic" />
+
+<hgroup>
+  <h1><a href="/">Minicom.nl</a></h1>
+  
+    <h2 class="subtitle">Thoughts and rants about software engineering.</h2>
+   
+</hgroup>
+
+
+				</header>
+				<footer>
+					<p>
+	
+		<a href="http://github.com/michaeldejong" class="btn btn-dark">GitHub</a>
+	
+	
+		<a href="http://twitter.com/java_devver" class="btn btn-dark">Twitter</a>
+	
+</p>
+				</footer>
+			</div>
+		</aside>
+    	<section class="right">
+    		<div class="inner-right">
+    			<div id="posts">
+    			  	<article class="post">
     
-  </author>
-  <generator uri="http://octopress.org/">Octopress</generator>
+  <header>
+    
+      <h1 class="entry-title">Automated Web Application Testing for Humans</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
 
   
-  <entry>
-    <title type="html"><![CDATA[Contributing to RxJava]]></title>
-    <link href="http://michaeldejong.github.io/blog/2013/07/14/contributing-to-rxjava/"/>
-    <updated>2013-07-14T13:54:00-07:00</updated>
-    <id>http://michaeldejong.github.io/blog/2013/07/14/contributing-to-rxjava</id>
-    <content type="html"><![CDATA[<p>I&rsquo;m a MSc Computer Science student at the Delft University of Technology. During my master track I&rsquo;ve had the pleasure to have followed two courses given by Erik Meijer (former Microsoft employee). Erik was involved in the creation of the Rx framework in Microsoft&rsquo;s .NET C#. If you&rsquo;re not familiar with Rx, I would recommend some of the videos found on <a href="http://channel9.msdn.com/tags/Rx/">Channel9</a>.</p>
 
-<p>One of the courses Erik has been teaching is Reactive Programming where he covers the Rx framework and the thoughts behind it. As a part of the course, we were asked to contribute to the Rx ecosystem in whatever programming language we liked. I choose to contribute to Netflix&rsquo;s RxJava. Last week I presented my contributions and experiences to my fellow students. Below you can find the presentation slides I used.</p>
 
-<script async class="speakerdeck-embed" data-id="c50bca20cee7013097764230e68ed5e3" data-ratio="1.33333333333333" src="//speakerdeck.com/assets/embed.js"></script>
+<time datetime="2013-04-27T13:10:00-07:00" pubdate data-updated="true"></time>
+        
+      </p>
+    
+  </header>
 
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Automated web application testing for humans]]></title>
-    <link href="http://michaeldejong.github.io/blog/2013/04/27/automated-web-application-testing-for-humans/"/>
-    <updated>2013-04-27T13:10:00-07:00</updated>
-    <id>http://michaeldejong.github.io/blog/2013/04/27/automated-web-application-testing-for-humans</id>
-    <content type="html"><![CDATA[<p>Web applications have become a very popular breed of software. The fact that the software needed to use a web application is already installed on every internet-capable computer adds to its appeal. For a software developer there are many different architectures and even more frameworks to choose from to build web applications with. But one important part of software development - testing - can be very hard in web applications.</p>
+
+<div class="entry-content"><p>Web applications have become a very popular breed of software. The fact that the software needed to use a web application is already installed on every internet-capable computer adds to its appeal. For a software developer there are many different architectures and even more frameworks to choose from to build web applications with. But one important part of software development - testing - can be very hard in web applications.</p>
 
 <p>There are a few tools out there to help you with testing web applications. The most popular one seems to be Selenium. Selenium offers you two options for creating automated tests for web applications: <a href="http://docs.seleniumhq.org/projects/ide/">Selenium IDE</a>, and <a href="http://docs.seleniumhq.org/projects/webdriver/">Selenium WebDriver</a>. Selenium IDE is a simple plugin for FireFox which enables you to record interactions with a browser and replay those interactions. It&rsquo;s most suitable for testers without a programming background. Selenium WebDriver on the other hand allows testers with a programming background (or developers) to write their own automated tests, which can be run from JUnit tests. <strong>But while using these tools myself I found myself easily annoyed at how fragile these tests actually are.</strong> In order to understand why this is so you have to understand how Selenium works.</p>
 
 <p>When you use Selenium IDE to record a session of interactions with your browser it&rsquo;s actually looking at what events you are triggering on which elements in the Document Object Model (DOM). Most of these elements can be identified with a <code>name</code>, <code>id</code> or <code>class</code> attribute. Take for example the login screen of Google&rsquo;s Gmail service. The username and password field are aptly named &ldquo;Email&rdquo; and &ldquo;Passwd&rdquo; in the DOM using the <code>id</code> attribute. So when we make a recording using Selenium IDE, it will know that I&rsquo;m typing in those two fields, and store the interaction together with that id attribute.</p>
 
-<p><img src="http://michaeldejong.github.io/images/gmail-login.png" alt="img" /> <img src="http://michaeldejong.github.io/images/selenium-ide.png" alt="img" /></p>
+<p><img src="/images/gmail-login.png" alt="img" /> <img src="/images/selenium-ide.png" alt="img" /></p>
 
 <p>Although this is a fairly cheap way to construct a test, there are several problems with this approach:</p>
 
@@ -70,7 +129,61 @@
 <p>If you iterate through all the issues I named earlier, you&rsquo;ll notice that such a tool could easily address the first three issues in the list. Since test documents don&rsquo;t specifically name attributes of elements in the DOM, it doesn&rsquo;t really matter what the <code>id</code> attribute of any element says. Modifications to the DOM on a structural level don&rsquo;t affect the interpretation of the presented web page to the same degree. And finally because this type of &lsquo;recording&rsquo; is much more resilient to changes in the DOM, it should require only a minimal amount of test case maintenance, whilst the test cases themselves remain human-readable.</p>
 
 <p>I&rsquo;m very interested to see if it would be possible to create such a tool and to see if it indeed holds so much value for testers as I believe that it does&hellip;</p>
-]]></content>
-  </entry>
+</div>
+
+
+</article>
+
+
+        <div class="sharing">
   
-</feed>
+  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://michaeldejong.github.io/blog/2013/04/27/automated-web-application-testing-for-humans/" data-via="java_devver" data-counturl="http://michaeldejong.github.io/blog/2013/04/27/automated-web-application-testing-for-humans/" >Tweet</a>
+  
+  
+  
+</div>
+
+
+
+
+
+    			</div>
+    			<footer id="footer">
+    				<p class="credit">
+  Copyright &copy; 2014 - Michael de Jong. Powered by <a href="http://octopress.org">Octopress</a>
+</p>
+
+
+    			</footer>
+    			
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = '//platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+<link href='http://fonts.googleapis.com/css?family=Quattrocento+Sans|Roboto:400,300' rel='stylesheet' type='text/css'>
+
+
+
+
+
+    		</div>
+    	</section>
+  	</div>
+</body>
+</html>

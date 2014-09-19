@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[Minicom.nl]]></title>
-  <link href="http://michaeldejong.github.io/atom.xml" rel="self"/>
+  <title><![CDATA[Category: testing | Minicom.nl]]></title>
+  <link href="http://michaeldejong.github.io/blog/categories/testing/atom.xml" rel="self"/>
   <link href="http://michaeldejong.github.io/"/>
   <updated>2014-09-18T22:00:19-07:00</updated>
   <id>http://michaeldejong.github.io/</id>
@@ -12,20 +12,6 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
-  
-  <entry>
-    <title type="html"><![CDATA[Contributing to RxJava]]></title>
-    <link href="http://michaeldejong.github.io/blog/2013/07/14/contributing-to-rxjava/"/>
-    <updated>2013-07-14T13:54:00-07:00</updated>
-    <id>http://michaeldejong.github.io/blog/2013/07/14/contributing-to-rxjava</id>
-    <content type="html"><![CDATA[<p>I&rsquo;m a MSc Computer Science student at the Delft University of Technology. During my master track I&rsquo;ve had the pleasure to have followed two courses given by Erik Meijer (former Microsoft employee). Erik was involved in the creation of the Rx framework in Microsoft&rsquo;s .NET C#. If you&rsquo;re not familiar with Rx, I would recommend some of the videos found on <a href="http://channel9.msdn.com/tags/Rx/">Channel9</a>.</p>
-
-<p>One of the courses Erik has been teaching is Reactive Programming where he covers the Rx framework and the thoughts behind it. As a part of the course, we were asked to contribute to the Rx ecosystem in whatever programming language we liked. I choose to contribute to Netflix&rsquo;s RxJava. Last week I presented my contributions and experiences to my fellow students. Below you can find the presentation slides I used.</p>
-
-<script async class="speakerdeck-embed" data-id="c50bca20cee7013097764230e68ed5e3" data-ratio="1.33333333333333" src="//speakerdeck.com/assets/embed.js"></script>
-
-]]></content>
-  </entry>
   
   <entry>
     <title type="html"><![CDATA[Automated web application testing for humans]]></title>
@@ -38,7 +24,7 @@
 
 <p>When you use Selenium IDE to record a session of interactions with your browser it&rsquo;s actually looking at what events you are triggering on which elements in the Document Object Model (DOM). Most of these elements can be identified with a <code>name</code>, <code>id</code> or <code>class</code> attribute. Take for example the login screen of Google&rsquo;s Gmail service. The username and password field are aptly named &ldquo;Email&rdquo; and &ldquo;Passwd&rdquo; in the DOM using the <code>id</code> attribute. So when we make a recording using Selenium IDE, it will know that I&rsquo;m typing in those two fields, and store the interaction together with that id attribute.</p>
 
-<p><img src="http://michaeldejong.github.io/images/gmail-login.png" alt="img" /> <img src="http://michaeldejong.github.io/images/selenium-ide.png" alt="img" /></p>
+<p><img src="/images/gmail-login.png" alt="img" /> <img src="/images/selenium-ide.png" alt="img" /></p>
 
 <p>Although this is a fairly cheap way to construct a test, there are several problems with this approach:</p>
 
