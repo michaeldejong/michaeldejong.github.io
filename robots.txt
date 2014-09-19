@@ -1,4 +1,4 @@
 User-agent: *
 Disallow: 
 
-Sitemap: http://michaeldejong.github.io/sitemap.xml 
+Sitemap: http://blog.minicom.nl/sitemap.xml 

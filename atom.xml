@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Minicom.nl]]></title>
-  <link href="http://michaeldejong.github.io/atom.xml" rel="self"/>
-  <link href="http://michaeldejong.github.io/"/>
-  <updated>2014-09-18T22:08:45-07:00</updated>
-  <id>http://michaeldejong.github.io/</id>
+  <link href="http://blog.minicom.nl/atom.xml" rel="self"/>
+  <link href="http://blog.minicom.nl/"/>
+  <updated>2014-09-18T22:11:12-07:00</updated>
+  <id>http://blog.minicom.nl/</id>
   <author>
     <name><![CDATA[Michael de Jong]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[Contributing to RxJava]]></title>
-    <link href="http://michaeldejong.github.io/blog/2013/07/14/contributing-to-rxjava/"/>
+    <link href="http://blog.minicom.nl/blog/2013/07/14/contributing-to-rxjava/"/>
     <updated>2013-07-14T13:54:00-07:00</updated>
-    <id>http://michaeldejong.github.io/blog/2013/07/14/contributing-to-rxjava</id>
+    <id>http://blog.minicom.nl/blog/2013/07/14/contributing-to-rxjava</id>
     <content type="html"><![CDATA[<p>I&rsquo;m a MSc Computer Science student at the Delft University of Technology. During my master track I&rsquo;ve had the pleasure to have followed two courses given by Erik Meijer (former Microsoft employee). Erik was involved in the creation of the Rx framework in Microsoft&rsquo;s .NET C#. If you&rsquo;re not familiar with Rx, I would recommend some of the videos found on <a href="http://channel9.msdn.com/tags/Rx/">Channel9</a>.</p>
 
 <p>One of the courses Erik has been teaching is Reactive Programming where he covers the Rx framework and the thoughts behind it. As a part of the course, we were asked to contribute to the Rx ecosystem in whatever programming language we liked. I choose to contribute to Netflix&rsquo;s RxJava. Last week I presented my contributions and experiences to my fellow students. Below you can find the presentation slides I used.</p>
@@ -29,16 +29,16 @@
   
   <entry>
     <title type="html"><![CDATA[Automated web application testing for humans]]></title>
-    <link href="http://michaeldejong.github.io/blog/2013/04/27/automated-web-application-testing-for-humans/"/>
+    <link href="http://blog.minicom.nl/blog/2013/04/27/automated-web-application-testing-for-humans/"/>
     <updated>2013-04-27T13:10:00-07:00</updated>
-    <id>http://michaeldejong.github.io/blog/2013/04/27/automated-web-application-testing-for-humans</id>
+    <id>http://blog.minicom.nl/blog/2013/04/27/automated-web-application-testing-for-humans</id>
     <content type="html"><![CDATA[<p>Web applications have become a very popular breed of software. The fact that the software needed to use a web application is already installed on every internet-capable computer adds to its appeal. For a software developer there are many different architectures and even more frameworks to choose from to build web applications with. But one important part of software development - testing - can be very hard in web applications.</p>
 
 <p>There are a few tools out there to help you with testing web applications. The most popular one seems to be Selenium. Selenium offers you two options for creating automated tests for web applications: <a href="http://docs.seleniumhq.org/projects/ide/">Selenium IDE</a>, and <a href="http://docs.seleniumhq.org/projects/webdriver/">Selenium WebDriver</a>. Selenium IDE is a simple plugin for FireFox which enables you to record interactions with a browser and replay those interactions. It&rsquo;s most suitable for testers without a programming background. Selenium WebDriver on the other hand allows testers with a programming background (or developers) to write their own automated tests, which can be run from JUnit tests. <strong>But while using these tools myself I found myself easily annoyed at how fragile these tests actually are.</strong> In order to understand why this is so you have to understand how Selenium works.</p>
 
 <p>When you use Selenium IDE to record a session of interactions with your browser it&rsquo;s actually looking at what events you are triggering on which elements in the Document Object Model (DOM). Most of these elements can be identified with a <code>name</code>, <code>id</code> or <code>class</code> attribute. Take for example the login screen of Google&rsquo;s Gmail service. The username and password field are aptly named &ldquo;Email&rdquo; and &ldquo;Passwd&rdquo; in the DOM using the <code>id</code> attribute. So when we make a recording using Selenium IDE, it will know that I&rsquo;m typing in those two fields, and store the interaction together with that id attribute.</p>
 
-<p><img src="http://michaeldejong.github.io/images/gmail-login.png" alt="img" /> <img src="http://michaeldejong.github.io/images/selenium-ide.png" alt="img" /></p>
+<p><img src="http://blog.minicom.nl/images/gmail-login.png" alt="img" /> <img src="http://blog.minicom.nl/images/selenium-ide.png" alt="img" /></p>
 
 <p>Although this is a fairly cheap way to construct a test, there are several problems with this approach:</p>
 

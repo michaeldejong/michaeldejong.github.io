@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: testing | Minicom.nl]]></title>
-  <link href="http://michaeldejong.github.io/blog/categories/testing/atom.xml" rel="self"/>
-  <link href="http://michaeldejong.github.io/"/>
-  <updated>2014-09-18T22:08:45-07:00</updated>
-  <id>http://michaeldejong.github.io/</id>
+  <link href="http://blog.minicom.nl/blog/categories/testing/atom.xml" rel="self"/>
+  <link href="http://blog.minicom.nl/"/>
+  <updated>2014-09-18T22:11:12-07:00</updated>
+  <id>http://blog.minicom.nl/</id>
   <author>
     <name><![CDATA[Michael de Jong]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[Automated web application testing for humans]]></title>
-    <link href="http://michaeldejong.github.io/blog/2013/04/27/automated-web-application-testing-for-humans/"/>
+    <link href="http://blog.minicom.nl/blog/2013/04/27/automated-web-application-testing-for-humans/"/>
     <updated>2013-04-27T13:10:00-07:00</updated>
-    <id>http://michaeldejong.github.io/blog/2013/04/27/automated-web-application-testing-for-humans</id>
+    <id>http://blog.minicom.nl/blog/2013/04/27/automated-web-application-testing-for-humans</id>
     <content type="html"><![CDATA[<p>Web applications have become a very popular breed of software. The fact that the software needed to use a web application is already installed on every internet-capable computer adds to its appeal. For a software developer there are many different architectures and even more frameworks to choose from to build web applications with. But one important part of software development - testing - can be very hard in web applications.</p>
 
 <p>There are a few tools out there to help you with testing web applications. The most popular one seems to be Selenium. Selenium offers you two options for creating automated tests for web applications: <a href="http://docs.seleniumhq.org/projects/ide/">Selenium IDE</a>, and <a href="http://docs.seleniumhq.org/projects/webdriver/">Selenium WebDriver</a>. Selenium IDE is a simple plugin for FireFox which enables you to record interactions with a browser and replay those interactions. It&rsquo;s most suitable for testers without a programming background. Selenium WebDriver on the other hand allows testers with a programming background (or developers) to write their own automated tests, which can be run from JUnit tests. <strong>But while using these tools myself I found myself easily annoyed at how fragile these tests actually are.</strong> In order to understand why this is so you have to understand how Selenium works.</p>
