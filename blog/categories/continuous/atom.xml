@@ -4,7 +4,7 @@
   <title><![CDATA[Category: continuous | Minicom.nl]]></title>
   <link href="http://blog.minicom.nl/blog/categories/continuous/atom.xml" rel="self"/>
   <link href="http://blog.minicom.nl/"/>
-  <updated>2014-11-08T18:07:09+01:00</updated>
+  <updated>2014-11-08T18:12:14+01:00</updated>
   <id>http://blog.minicom.nl/</id>
   <author>
     <name><![CDATA[Michael de Jong]]></name>
@@ -56,7 +56,7 @@
 
 <p>Imagine running two versions of the same web service on the same database, which has stored all its persistent data in some structure or schema. If the never version requires a slightly different schema, the older version might cease to function which could result in breaking the web service, until the upgrade of the system has completed and moved from a mixed-state to a single state again. This is aggrevated when the upgrade process takes a long time to complete.</p>
 
-<p>This is an ongoing challenge, there no off the shelf solutions, and in this upcoming blog series I will to cover it more in-depth. I will be showing you some of my research and results in this area. Stay tuned for more&hellip;</p>
+<p>This is an ongoing challenge, there is no off the shelf solution, and in this upcoming blog series I will to cover it more in-depth. I will be showing you some of my research and results in this area. Stay tuned for more&hellip;</p>
 ]]></content>
   </entry>
   
