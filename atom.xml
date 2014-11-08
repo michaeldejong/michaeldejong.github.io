@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Minicom.nl]]></title>
+  <link href="http://blog.minicom.nl/atom.xml" rel="self"/>
+  <link href="http://blog.minicom.nl/"/>
+  <updated>2014-09-18T22:11:12-07:00</updated>
+  <id>http://blog.minicom.nl/</id>
+  <author>
+    <name><![CDATA[Michael de Jong]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Contributing to RxJava]]></title>
+    <link href="http://blog.minicom.nl/blog/2013/07/14/contributing-to-rxjava/"/>
+    <updated>2013-07-14T13:54:00-07:00</updated>
+    <id>http://blog.minicom.nl/blog/2013/07/14/contributing-to-rxjava</id>
+    <content type="html"><![CDATA[<p>I&rsquo;m a MSc Computer Science student at the Delft University of Technology. During my master track I&rsquo;ve had the pleasure to have followed two courses given by Erik Meijer (former Microsoft employee). Erik was involved in the creation of the Rx framework in Microsoft&rsquo;s .NET C#. If you&rsquo;re not familiar with Rx, I would recommend some of the videos found on <a href="http://channel9.msdn.com/tags/Rx/">Channel9</a>.</p>
+
+<p>One of the courses Erik has been teaching is Reactive Programming where he covers the Rx framework and the thoughts behind it. As a part of the course, we were asked to contribute to the Rx ecosystem in whatever programming language we liked. I choose to contribute to Netflix&rsquo;s RxJava. Last week I presented my contributions and experiences to my fellow students. Below you can find the presentation slides I used.</p>
+
+<script async class="speakerdeck-embed" data-id="c50bca20cee7013097764230e68ed5e3" data-ratio="1.33333333333333" src="//speakerdeck.com/assets/embed.js"></script>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Automated web application testing for humans]]></title>
+    <link href="http://blog.minicom.nl/blog/2013/04/27/automated-web-application-testing-for-humans/"/>
+    <updated>2013-04-27T13:10:00-07:00</updated>
+    <id>http://blog.minicom.nl/blog/2013/04/27/automated-web-application-testing-for-humans</id>
+    <content type="html"><![CDATA[<p>Web applications have become a very popular breed of software. The fact that the software needed to use a web application is already installed on every internet-capable computer adds to its appeal. For a software developer there are many different architectures and even more frameworks to choose from to build web applications with. But one important part of software development - testing - can be very hard in web applications.</p>
+
+<p>There are a few tools out there to help you with testing web applications. The most popular one seems to be Selenium. Selenium offers you two options for creating automated tests for web applications: <a href="http://docs.seleniumhq.org/projects/ide/">Selenium IDE</a>, and <a href="http://docs.seleniumhq.org/projects/webdriver/">Selenium WebDriver</a>. Selenium IDE is a simple plugin for FireFox which enables you to record interactions with a browser and replay those interactions. It&rsquo;s most suitable for testers without a programming background. Selenium WebDriver on the other hand allows testers with a programming background (or developers) to write their own automated tests, which can be run from JUnit tests. <strong>But while using these tools myself I found myself easily annoyed at how fragile these tests actually are.</strong> In order to understand why this is so you have to understand how Selenium works.</p>
+
+<p>When you use Selenium IDE to record a session of interactions with your browser it&rsquo;s actually looking at what events you are triggering on which elements in the Document Object Model (DOM). Most of these elements can be identified with a <code>name</code>, <code>id</code> or <code>class</code> attribute. Take for example the login screen of Google&rsquo;s Gmail service. The username and password field are aptly named &ldquo;Email&rdquo; and &ldquo;Passwd&rdquo; in the DOM using the <code>id</code> attribute. So when we make a recording using Selenium IDE, it will know that I&rsquo;m typing in those two fields, and store the interaction together with that id attribute.</p>
+
+<p><img src="http://blog.minicom.nl/images/gmail-login.png" alt="img" /> <img src="http://blog.minicom.nl/images/selenium-ide.png" alt="img" /></p>
+
+<p>Although this is a fairly cheap way to construct a test, there are several problems with this approach:</p>
+
+<ul>
+<li><strong>Tests are not necessarily repeatable</strong>: Web application frameworks like ExtJS and Google Web Toolkit produce different unique <code>id</code> attribute values on every page serve. This means we need an alternative way of selecting the correct element in the DOM. There are several options like CSS and XPath selectors but these can get fairly complicated very quickly, which in turn negatively affects readability.</li>
+<li><strong>Tests are easily broken</strong>: When a developer or designer changes the structure of the DOM, there is a chance that certain CSS and XPath selectors will no longer work. Even worse, in case the name of the <code>id</code> attribute is changed the test will definitely fail and it will have to be fixed.</li>
+<li><strong>Repairing tests means re-recording the interaction between user and browser</strong>: The cost of recording is relatively small, but if tests break regularly this can become prohibitively expensive. Imaging that most of your tests are done somewhere in a secured area of your web application. In order to get there, the browser first has to login into the web application. If this login page is modified, all of these tests will have to be either re-recorded or fixed manually.</li>
+<li><strong>Test setup and tear down is expensive</strong>: In case you want to test a feature in your web application you are first required to log in, navigate to the appropriate page, perform the actual test, and log out. Such a test case can take considerable time to record, while the only important section is the actual test.</li>
+</ul>
+
+
+<p>There is an obvious advantage in having an automated test suite which tests your web application from a user&rsquo;s perspective, but these issues are making automated tests unwieldy and costly. The most sensible conclusion is that the approach of working on a DOM level is simply too low-level for creating and maintaining an extensive automated test suite. But now let&rsquo;s approach this from a tester&rsquo;s point of view. Most of the testers I know are very capable at writing test cases for manual regression testing. These test cases are well documented and manually executed before pushing software out to customers. These regression test documents usually have the following structure:</p>
+
+<blockquote><p><strong>Preconditions</strong>: Your browser is displaying the login screen.</p>
+
+<p><strong>Procedure</strong></p>
+
+<ol>
+<li>Enter &ldquo;admin&rdquo; in the &ldquo;Username&rdquo; field.</li>
+<li>Enter &ldquo;test&rdquo; in the &ldquo;Password&rdquo; field.</li>
+<li>Click on the &ldquo;Login&rdquo; button.</li>
+</ol>
+
+
+<p><strong>Postcondition</strong>: You are now logged in, and your browser should be displaying the user&rsquo;s dashboard.</p></blockquote>
+
+<p>These regression test documents have a clear structure and are easy to read and maintain for testers. The reason that this works for human testers is that they can reason about what&rsquo;s displayed in the browser. They know that the &ldquo;Username&rdquo; field is the field that has the text &ldquo;Username&rdquo; displayed right next to it. They know that the &ldquo;Login&rdquo; button is the element that&rsquo;s clickable and contains the text &ldquo;Login&rdquo;. They know what the user&rsquo;s dashboard looks like. My ideal test automation tool for web applications would be a tool which is capable of interpreting test documents like to one above, and execute them fully automatic.</p>
+
+<p>If you iterate through all the issues I named earlier, you&rsquo;ll notice that such a tool could easily address the first three issues in the list. Since test documents don&rsquo;t specifically name attributes of elements in the DOM, it doesn&rsquo;t really matter what the <code>id</code> attribute of any element says. Modifications to the DOM on a structural level don&rsquo;t affect the interpretation of the presented web page to the same degree. And finally because this type of &lsquo;recording&rsquo; is much more resilient to changes in the DOM, it should require only a minimal amount of test case maintenance, whilst the test cases themselves remain human-readable.</p>
+
+<p>I&rsquo;m very interested to see if it would be possible to create such a tool and to see if it indeed holds so much value for testers as I believe that it does&hellip;</p>
+]]></content>
+  </entry>
+  
+</feed>

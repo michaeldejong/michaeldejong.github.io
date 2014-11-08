@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: open-source | Minicom.nl]]></title>
+  <link href="http://blog.minicom.nl/blog/categories/open-source/atom.xml" rel="self"/>
+  <link href="http://blog.minicom.nl/"/>
+  <updated>2014-09-18T22:11:12-07:00</updated>
+  <id>http://blog.minicom.nl/</id>
+  <author>
+    <name><![CDATA[Michael de Jong]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Contributing to RxJava]]></title>
+    <link href="http://blog.minicom.nl/blog/2013/07/14/contributing-to-rxjava/"/>
+    <updated>2013-07-14T13:54:00-07:00</updated>
+    <id>http://blog.minicom.nl/blog/2013/07/14/contributing-to-rxjava</id>
+    <content type="html"><![CDATA[<p>I&rsquo;m a MSc Computer Science student at the Delft University of Technology. During my master track I&rsquo;ve had the pleasure to have followed two courses given by Erik Meijer (former Microsoft employee). Erik was involved in the creation of the Rx framework in Microsoft&rsquo;s .NET C#. If you&rsquo;re not familiar with Rx, I would recommend some of the videos found on <a href="http://channel9.msdn.com/tags/Rx/">Channel9</a>.</p>
+
+<p>One of the courses Erik has been teaching is Reactive Programming where he covers the Rx framework and the thoughts behind it. As a part of the course, we were asked to contribute to the Rx ecosystem in whatever programming language we liked. I choose to contribute to Netflix&rsquo;s RxJava. Last week I presented my contributions and experiences to my fellow students. Below you can find the presentation slides I used.</p>
+
+<script async class="speakerdeck-embed" data-id="c50bca20cee7013097764230e68ed5e3" data-ratio="1.33333333333333" src="//speakerdeck.com/assets/embed.js"></script>
+
+]]></content>
+  </entry>
+  
+</feed>
