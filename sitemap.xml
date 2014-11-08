@@ -3,9 +3,17 @@
   
   
   <url>
+    <loc>http://blog.minicom.nl/blog/2014/09/19/an-introduction-to-continuous-deployment/</loc>
+    
+    <lastmod>2014-09-19T20:15:00+02:00</lastmod>
+    
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
     <loc>http://blog.minicom.nl/blog/2013/07/14/contributing-to-rxjava/</loc>
     
-    <lastmod>2013-07-14T13:54:00-07:00</lastmod>
+    <lastmod>2013-07-14T22:54:00+02:00</lastmod>
     
     <priority>0.8</priority>
   </url>
@@ -13,7 +21,7 @@
   <url>
     <loc>http://blog.minicom.nl/blog/2013/04/27/automated-web-application-testing-for-humans/</loc>
     
-    <lastmod>2013-04-27T13:10:00-07:00</lastmod>
+    <lastmod>2013-04-27T22:10:00+02:00</lastmod>
     
     <priority>0.8</priority>
   </url>
@@ -21,14 +29,14 @@
   
   <url>
     <loc>http://blog.minicom.nl/blog/archives/</loc>
-    <lastmod>2014-09-18T22:11:12-07:00</lastmod>
+    <lastmod>2014-11-08T18:07:09+01:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   
   <url>
     <loc>http://blog.minicom.nl/</loc>
-    <lastmod>2014-09-18T22:11:12-07:00</lastmod>
+    <lastmod>2014-11-08T18:07:09+01:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>

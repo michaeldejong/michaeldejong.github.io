@@ -4,7 +4,7 @@
   <title><![CDATA[Category: open-source | Minicom.nl]]></title>
   <link href="http://blog.minicom.nl/blog/categories/open-source/atom.xml" rel="self"/>
   <link href="http://blog.minicom.nl/"/>
-  <updated>2014-09-18T22:11:12-07:00</updated>
+  <updated>2014-11-08T18:07:09+01:00</updated>
   <id>http://blog.minicom.nl/</id>
   <author>
     <name><![CDATA[Michael de Jong]]></name>
@@ -16,7 +16,7 @@
   <entry>
     <title type="html"><![CDATA[Contributing to RxJava]]></title>
     <link href="http://blog.minicom.nl/blog/2013/07/14/contributing-to-rxjava/"/>
-    <updated>2013-07-14T13:54:00-07:00</updated>
+    <updated>2013-07-14T22:54:00+02:00</updated>
     <id>http://blog.minicom.nl/blog/2013/07/14/contributing-to-rxjava</id>
     <content type="html"><![CDATA[<p>I&rsquo;m a MSc Computer Science student at the Delft University of Technology. During my master track I&rsquo;ve had the pleasure to have followed two courses given by Erik Meijer (former Microsoft employee). Erik was involved in the creation of the Rx framework in Microsoft&rsquo;s .NET C#. If you&rsquo;re not familiar with Rx, I would recommend some of the videos found on <a href="http://channel9.msdn.com/tags/Rx/">Channel9</a>.</p>
 

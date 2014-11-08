@@ -4,7 +4,7 @@
   <title><![CDATA[Category: automated | Minicom.nl]]></title>
   <link href="http://blog.minicom.nl/blog/categories/automated/atom.xml" rel="self"/>
   <link href="http://blog.minicom.nl/"/>
-  <updated>2014-09-18T22:11:12-07:00</updated>
+  <updated>2014-11-08T18:07:09+01:00</updated>
   <id>http://blog.minicom.nl/</id>
   <author>
     <name><![CDATA[Michael de Jong]]></name>
@@ -16,7 +16,7 @@
   <entry>
     <title type="html"><![CDATA[Automated web application testing for humans]]></title>
     <link href="http://blog.minicom.nl/blog/2013/04/27/automated-web-application-testing-for-humans/"/>
-    <updated>2013-04-27T13:10:00-07:00</updated>
+    <updated>2013-04-27T22:10:00+02:00</updated>
     <id>http://blog.minicom.nl/blog/2013/04/27/automated-web-application-testing-for-humans</id>
     <content type="html"><![CDATA[<p>Web applications have become a very popular breed of software. The fact that the software needed to use a web application is already installed on every internet-capable computer adds to its appeal. For a software developer there are many different architectures and even more frameworks to choose from to build web applications with. But one important part of software development - testing - can be very hard in web applications.</p>
 
