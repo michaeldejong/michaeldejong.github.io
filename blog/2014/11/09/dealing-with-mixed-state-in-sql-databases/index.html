@@ -1,0 +1,260 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Dealing with mixed-state in SQL databases - Minicom.nl</title>
+  <meta name="author" content="Michael de Jong">
+
+  
+  <meta name="description" content="In the previous blog post I gave a very brief introduction to the concept of Continuous Deployment and how you can achieve it by using a load &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://blog.minicom.nl/blog/2014/11/09/dealing-with-mixed-state-in-sql-databases">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/atom.xml" rel="alternate" title="Minicom.nl" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href='http://fonts.googleapis.com/css?family=Quattrocento+Sans|Roboto:400,300' rel='stylesheet' type='text/css'>
+
+  
+
+</head>
+
+
+<body>
+	<div class="container">
+		<aside class="left">
+			<div class="inner-left">
+				<header>
+					
+  <img src="http://www.gravatar.com/avatar/e8fe8655c9bacb09f19065f1d2559259?s=200" alt="Gravatar of Michael de Jong " title="Gravatar of Michael de Jong" class="profilepic" />
+
+<hgroup>
+  <h1><a href="/">Minicom.nl</a></h1>
+  
+    <h2 class="subtitle">Thoughts and rants about software engineering.</h2>
+   
+</hgroup>
+
+
+				</header>
+				<footer>
+					<p>
+	
+		<a href="http://github.com/michaeldejong" class="btn btn-dark">GitHub</a>
+	
+	
+		<a href="http://twitter.com/java_devver" class="btn btn-dark">Twitter</a>
+	
+</p>
+				</footer>
+			</div>
+		</aside>
+    	<section class="right">
+    		<div class="inner-right">
+    			<div id="posts">
+    			  	<article class="post">
+    
+  <header>
+    
+      <h1 class="entry-title">Dealing With Mixed-state in SQL Databases</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-11-09T01:45:23+01:00" pubdate data-updated="true"></time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>In the previous blog post I gave a very brief introduction to the concept of Continuous Deployment and how you can achieve it by using a load balancer. In this post I&rsquo;ll be digging deeper into Continuous Deployment but mainly focussing on one of the biggest problems implementors of Continuous Deployment face: storing and retrieving data stored in databases. In particular SQL databases.</p>
+
+<p>It&rsquo;s a given that software evolves over time for various reasons: bug fixes, changing requirements, reducing technical debt, or various other reasons. As a consequence, that means that the way software stores and retrieves persistent data, also changes over time. Many (web)-applications use relational databases to store persistent data. In particular SQL databases like MySQL, PostgreSQL, MSSQL or Oracle are used often. The SQL language and concepts themselves were introduced in the 1980s, and have remained largely unchanged. Despite the growing popularity of NoSQL alternatives, they still remain to be extensively used in most web applications in some capacity.</p>
+
+<h2>A more accurate problem description</h2>
+
+<p>Today&rsquo;s relational SQL databases actually have two problems when used in a Continuous Deployment setting. The first and most obvious problem is dealing with the blocking nature of some operations in SQL databases, making schema evolution in SQL databases prohibitive in live production environments. The second and less obvious problem is dealing with mixed-state. This is a problem NoSQL databases also face, but is largely ignored in both areas.</p>
+
+<h3>Dealing with the blocking nature of DDL statements</h3>
+
+<p>DDL statements are statements which describe an action on the schema of a database. Examples would be creating a table, or dropping a column, or adding a foreign key. In SQL databases these operations are often regarded as statements used during maintenance, and often assume that the database is not in active use while they are performed. As a result, database developers have implemented them in such a way that they often require a write lock on the entire table and thus don&rsquo;t play very well with other DML queries. In addition they are typically slow and disruptive under stressed circumstances. If you want your software to be continuously deployable, you will need to find a way around these blocking operations. This greatly depends on the SQL database you are using and your use case (nature of your application, method of application deployment, etc).</p>
+
+<h3>Dealing with mixed-state</h3>
+
+<p>As explained in the previous blog post, when you are in the process of evolving a schema from one version to the next there is a period of time where both versions of the schema are active. This period is more commonly referred to as the mixed-state. This mixed-state is due to the fact that even though the switchover from the old to the new version of the web application might be atomical, there is a period where both versions of the web application are active at the same time, although one is not yet handling incoming user requests. Both require a different schema to operate on, and can/should not operate on each other&rsquo;s schema.</p>
+
+<h2>Current state of schema evolution in practice</h2>
+
+<p>If you wish to use relational databases in a production environment with Continuous Deployment there are currently two practical ways of doing this. The first is maintain everything manually, letting your application deal with the mixed-state and use a technique called <code>expand-contract</code> to evolve the database schema. The alternative is using a tool like the Percona toolkit, which will perform this expand-contract technique in an automated fashion, and performs an atomic table rename to switch from one schema to the other. <strong>Let&rsquo;s examine why neither option is favorable</strong>.</p>
+
+<h3>Manual evolution</h3>
+
+<p>The first option is to handle the evolution and migration manually. Let&rsquo;s imagine we have a web application running in production on a certain database schema and our application is deployed using rolling upgrades. The SQL database currently contains a <code>users</code> table which holds information on every user that has ever registered with the web application. To be able to suspend the accounts of their users in some cases, the software engineers have decided that they want to add a new column called <code>suspended</code> to the <code>users</code> table, signifying if an account has been suspended or is still active. However simply executing a query which adds this column to the existing <code>users</code> table would require a write lock on the entire table, and block other queries from retrieving data or updating data in this table. Since this web application hosts many millions of users, and the <code>users</code> table itself if constantly used, this is deemed too costly since it would require some downtime.</p>
+
+<p><img src="/images/manual-migration-path-step0.png" alt="" /></p>
+
+<p>Instead the software engineers create a new table called <code>users_v2</code> with the same columns that the original <code>users</code> table contains plus the new <code>suspended</code> column. Next they deploy a new version of the application which will read and write user information from and to the <code>users</code> table, but also write these records to the new <code>users_v2</code> table whenever a change is made to one of the rows in the <code>users</code> table. In addition to this, they start a background task which copies over all entries in the <code>users</code> table to the new <code>users_v2</code> table, to ensure that all users are copied within a finite amount of time.</p>
+
+<p><img src="/images/manual-migration-path-step1.png" alt="" /></p>
+
+<p>Finally when the two tables contain an equal amount of records, the migration has achieved the mixed-state successfully, and a new version of the application can be deployed which will read and write from the new <code>users_v2</code> table, but also update the records in the <code>users</code> table if a records is changed in the <code>users_v2</code> table. This has to be done since we&rsquo;re using the rolling upgrades method to deploy our application. During the deployment of the new application two different versions are active and might write modifications to both the old and the new <code>users</code> table.</p>
+
+<p><img src="/images/manual-migration-path-step2.png" alt="" /></p>
+
+<p>Once this deployment has completed another version of the application can be deployed which will only read and write from the new <code>users_v2</code> table. Once this deployment has succesfully completed, the original <code>users</code> table may be deleted.</p>
+
+<p><img src="/images/manual-migration-path-step3.png" alt="" /></p>
+
+<p>Please note that it is possible to also use triggers in many SQL database to keep the two tables synchronized. Whenever a record is changed of a table that has a trigger, it may run additional queries or snippets of code. If you add a trigger which upon changes in data in the <code>users</code> table, writes these changes to the <code>users_v2</code>, it is possible to keep these these two tables synchronized.</p>
+
+<h4>Evaluation</h4>
+
+<p>This might seem like a logical way to evolve the schema of the database under these strict conditions, but there are several issues with this method:</p>
+
+<ul>
+<li>Deploying a change to the schema of the database requires several (re)deployments of your web application, tightly tying schema changes to your application development. These in-between versions of the application are specifically aimed at dealing with mixed-state, and need to synchronize data between two tables. It would be a lot easier if you (as a developer) would not have to deal with this state.</li>
+<li>This method makes the application responsible for dealing with mixed-state situations. This means that the database layer in your application has to deal with this added complexity. Although not impossible it increases the complexity of the database layer.</li>
+<li>Probably the most useful feature in relational databases is the <strong>foreign key constraint</strong>. How do you deal with foreign key constraints in this method? A table like the <code>users</code> table is often referred to by other tables in web applications, so duplicating and replacing this table using this method while maintaining referential integrety through foreign key constraints is quite a challenge if not impossible.</li>
+<li>How do you roll back your changes to the application and the schema of the database in case of problems? Perhaps it is no longer possible to deploy older versions of your application.</li>
+</ul>
+
+
+<p>So there are quite some issues to think about before employing this method for evolving the schema of your database. Luckily there are some automated variations of this approach.</p>
+
+<h3>Automated evolution</h3>
+
+<p>So manually performing evolution of schema evolution is quite complex, and has a number of caveats. In this section I&rsquo;ll cover some of the tools that automate the same process and which address some of these issues.</p>
+
+<h4><a href="https://openarkkit.googlecode.com/svn/trunk/openarkkit/doc/html/introduction.html">OpenArk Kit</a> &amp; <a href="http://www.percona.com/doc/percona-toolkit/2.2/pt-online-schema-change.html">Percona Toolkit</a></h4>
+
+<p>The first two tools are the OpenArk Kit and the Percona Toolkit. These toolkits consists of several utility command-line tools which handle everyday maintenance tasks for MySQL databases. Amongst these tools, there are two tools called &ldquo;oak-online-alter-table&rdquo; (OpenArk Kit) and &ldquo;pt-online-schema-change&rdquo; (Percona Toolkit), which aim to make ALTER TABLE operations on tables in MySQL databases non-blocking. They both do this by creating <strong>ghost-tables</strong> (also known as mirror-tables or shadow-tables), which is more or less the same process as we&rsquo;ve seen in the <em>Manual evolution</em> section.</p>
+
+<p>These tools create an empty ghost-table with the new structure based on the original table. They then install triggers on the original table which ensures that whenever a row is changed in the original table, that is reflected in the ghost-table. A background task then fills the ghost-table up with data originating from the original table. Once this process has completed, the names of the original and the ghost-table are swapped in an atomic table rename operation (either manually or automated), and the trigger is removed. This effectively completes the evolution.</p>
+
+<p>If you study the documentation of these tools you&rsquo;ll find that they do not support foreign keys very well. For instance OpenArk Kit, does not work when the table that is being modified has foreign keys defined on it. Percona handles things slightly better, but is also not sufficient. For instance the Percona documentation states the following about foreign keys:</p>
+
+<blockquote><p>Foreign keys complicate the tool&rsquo;s operation and introduce additional risk. The technique of atomically renaming the original and new tables does not work when foreign keys refer to the table.</p></blockquote>
+
+<p>In order to deal with this situation, it offers the following options:</p>
+
+<ul>
+<li><strong>rebuild_constraints</strong>, which basically means that the foreign keys are dropped and re-recreated (a process which itself can take very long and as you&rsquo;ll see in the next blog post is also blocking).</li>
+<li><strong>drop_swap</strong>, this method first disables foreign key checks for the entire database. This means that referential integrity is no longer enforced, and will allow the database to become inconsistent/invalid. Then the original table is dropped (a process which cannot be rolled back), and then the new table is renamed to the original table&rsquo;s name effectively taking its place. At this point the foreign keys check can be re-enabled.</li>
+<li><strong>none</strong>, which does the same as <strong>drop_swap</strong> but does not rename the new table to the original table&rsquo;s name.</li>
+</ul>
+
+
+<h4><a href="https://www.facebook.com/notes/mysql-at-facebook/online-schema-change-for-mysql/430801045932">Facebook&rsquo;s Online Schema Change</a></h4>
+
+<p>Facebook being Facebook, has created its own solution to this problem. <strong>Online Schema Change</strong> (OSC) is a tool for MySQL databases which does things slightly different. OSC creates an exact copy of the original table (both structure and data). In the mean time OSC captures all changes that happen to rows stored in the original table using triggers. These triggers store the modifications in a <strong>deltas</strong> table. Once the copy has been created OSC applies the operation on the ghost-table that was originally intented to be execute on the original table (for example adding a column). Since these operations often block this step may take a while. Once this operation has completed, OSC then starts replaying all the changes that happened to the original table from the deltas table onto the modified ghost-table. The final step is the &ldquo;cut-over&rdquo; step which atomically swaps the table names for both the original table and the ghost-table, when the <strong>deltas</strong> table has (almost) been exhausted.</p>
+
+<p>However, as it turns out, OSC also does not support foreign keys. One of the limitations of OSC (see link above) is that there should no foreign keys present on the table to migrate.</p>
+
+<h4><a href="https://github.com/freels/table_migrator">Table Migrator</a></h4>
+
+<p>Table Migrator is another attempt at solving this problem for MySQL databases. Like the previous approaches it creates a ghost-table and applies the changes to this table that should originally be applied to the original table. However it does not copy data over using triggers, but a background process which copies batches of rows from the original table to the ghost table. To do this correctly, it requires a column called updated_at (if the row is mutable) or created_at (if the row is immutable), which stores a timestamp when the row was modified or created. By comparing the timestamps of the original table and the ghost-table it can determine which records are outdated in the ghost table and must be updated using data from the original table. It does this in multiple passes over all records in the original table, until only a small number of rows is still outdated. At this point it acquires a write lock on the table (blocking other queries from using that table), copies over the last remaining outdated rows, and swaps the table names for both tables before releasing the write lock again.</p>
+
+<p>This approach does not use triggers like the other solutions use, but also does not support foreign keys. In addition it seems to require some additional instructions when rows can be deleted from the original table during migration in order to stay consistent. Interestingly enough this tool does attempt to integrate with ActiveRecord, which perhaps allows for some better version management of database schema changes. The other tools covered so far are command-line tools, which have no support for versioning database schemas.</p>
+
+<h4><a href="https://developers.soundcloud.com/blog/soundcloud-mobile-%E2%80%93-proxies.html">SoundCloud&rsquo;s Large Hadron Migrator</a></h4>
+
+<p>The last solution I&rsquo;ll cover in this blog post is SoundCloud&rsquo;s Large Hadron Migrator (LHM). LHM is also aimed at evolving schema of MySQL databases. LHM creates a journal table which will record modifications to the original table (using triggers) much like OSC created and populated the deltas table. In addition LHM creates the ghost-table like all the other solutions have done, and applies its structural changes to this table instead of the original table. LHM will then proceed to copy data from the original table to the new ghost-table (up to data that was present at the start of the migration). Once this process has completed the table names are atomically switched, and the journal entries are replayed.</p>
+
+<p>It&rsquo;s worth noting that similar to previously covered solutions, LHM also does not support foreign keys.</p>
+
+<h2>Conclusion</h2>
+
+<ul>
+<li>I&rsquo;ve shown how manual schema evolution is no easy feat and introduced substantial complexity to the development of the web application.</li>
+<li>Foreign keys are pretty much not supported, significantly reducing the value of these tools and approaches.</li>
+<li>Versioning the evolution of the schema is difficult, and typically an afterthought.</li>
+<li>Evolution of schema is limited because only small steps can be undertaken. This hinders bigger refactorings of code when they require significant changes in the existing database schema.</li>
+<li>The tools covered in this blog post offer no solution for the mixed-state problem. They only aim at solving the problem of blocking DDL statements in SQL databases.</li>
+</ul>
+
+
+<h2>Next up</h2>
+
+<p>In the next blog post I&rsquo;ll be covering some of my result of profiling DDL statements in both MySQL and PostgreSQL. Do these operations really show blocking behaviour? How so? How long? And how could this help me with evolving database schemas without causing downtime for its users.</p>
+</div>
+
+
+</article>
+
+
+        <div class="sharing">
+  
+  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://blog.minicom.nl/blog/2014/11/09/dealing-with-mixed-state-in-sql-databases/" data-via="java_devver" data-counturl="http://blog.minicom.nl/blog/2014/11/09/dealing-with-mixed-state-in-sql-databases/" >Tweet</a>
+  
+  
+  
+</div>
+
+
+
+
+
+    			</div>
+    			<footer id="footer">
+    				<p class="credit">
+  Copyright &copy; 2014 - Michael de Jong. Powered by <a href="http://octopress.org">Octopress</a>
+</p>
+
+
+    			</footer>
+    			
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = '//platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+<link href='http://fonts.googleapis.com/css?family=Quattrocento+Sans|Roboto:400,300' rel='stylesheet' type='text/css'>
+
+
+
+
+
+    		</div>
+    	</section>
+  	</div>
+</body>
+</html>
