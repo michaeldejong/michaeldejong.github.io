@@ -39,7 +39,7 @@ Once this deployment has completed another version of the application can be dep
 
 ![](/images/manual-migration-path-step3.png)
 
-Please note that it is possible to also use triggers in many SQL database to keep the two tables synchronized. Whenever a record is changed of a table that has a trigger, it may run additional queries or snippets of code. If you add a trigger which upon changes in data in the `users` table, writes these changes to the `users_v2`, it is possible to keep these these two tables synchronized.
+Please note that it is also possible to use triggers in many SQL databases to keep these two tables synchronized. Whenever a record is changed in a table that has a trigger added to it, it may run additional queries or snippets of code. If you add a trigger which upon changes in data in the `users` table, writes these changes to the `users_v2`, it is possible to keep these these two tables synchronized.
 
 
 #### Evaluation
