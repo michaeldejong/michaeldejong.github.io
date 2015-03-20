@@ -23,6 +23,13 @@ To do this I created a small profiler tool named [Nemesis](http://github.com/qua
 # Setup
 For this series of experiments I gratefully used a server with a quad-core Intel Core i7-3770, a 1TB hard disk, and 16GB memory on loan from the CHISEL lab at UVIC. On this server I installed both PostgreSQL 9.3.6 and MySQL 5.5.41 on a Ubuntu 14.04 LTS installation. Both databases were slightly tweaked to use more of the available memory than the default settings. For those who are interested, MySQL used the InnoDB engine by default.
 
+The results below have been taken from a series of experiments run both on MySQL as well as on PostgreSQL. In both cases, all scenarios were run with 6 worker threads in total: 
+
+* 2 workers for SELECT statements.
+* 2 workers for UPDATE statements.
+* 1 worker for INSERT statements.
+* 1 worker for DELETE statements.
+
 # Results
 The results are interesting as they differ significantly between MySQL and PostgreSQL. Below I've posted several migration scenarios one might perform on an existing table. For each scenario you'll find a image, which graphs the properties of the queries Nemesis performed on the database. The x-axis resembles time - each mark on this axis equals a second. The y-axis resembles the duration of a query - 1 pixel equals 1 millisecond (this is only to give a general feel for query performance). Each color represents a different type of query being performed.
 
