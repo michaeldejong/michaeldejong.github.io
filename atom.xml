@@ -4,7 +4,7 @@
   <title><![CDATA[Minicom.nl]]></title>
   <link href="http://blog.minicom.nl/atom.xml" rel="self"/>
   <link href="http://blog.minicom.nl/"/>
-  <updated>2015-03-20T14:15:45+01:00</updated>
+  <updated>2015-03-20T16:17:34+01:00</updated>
   <id>http://blog.minicom.nl/</id>
   <author>
     <name><![CDATA[Michael de Jong]]></name>
@@ -38,6 +38,16 @@
 <h1>Setup</h1>
 
 <p>For this series of experiments I gratefully used a server with a quad-core Intel Core i7-3770, a 1TB hard disk, and 16GB memory on loan from the CHISEL lab at UVIC. On this server I installed both PostgreSQL 9.3.6 and MySQL 5.5.41 on a Ubuntu 14.04 LTS installation. Both databases were slightly tweaked to use more of the available memory than the default settings. For those who are interested, MySQL used the InnoDB engine by default.</p>
+
+<p>The results below have been taken from a series of experiments run both on MySQL as well as on PostgreSQL. In both cases, all scenarios were run with 6 worker threads in total:</p>
+
+<ul>
+<li>2 workers for SELECT statements.</li>
+<li>2 workers for UPDATE statements.</li>
+<li>1 worker for INSERT statements.</li>
+<li>1 worker for DELETE statements.</li>
+</ul>
+
 
 <h1>Results</h1>
 
