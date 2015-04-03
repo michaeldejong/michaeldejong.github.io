@@ -3,6 +3,14 @@
   
   
   <url>
+    <loc>http://blog.minicom.nl/blog/2015/04/03/revisiting-profiling-ddl-statements-mysqls-return/</loc>
+    
+    <lastmod>2015-04-03T16:02:59+02:00</lastmod>
+    
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
     <loc>http://blog.minicom.nl/blog/2015/03/08/profiling-ddl-statements/</loc>
     
     <lastmod>2015-03-08T14:37:05+01:00</lastmod>
@@ -45,14 +53,14 @@
   
   <url>
     <loc>http://blog.minicom.nl/blog/archives/</loc>
-    <lastmod>2015-03-20T16:17:34+01:00</lastmod>
+    <lastmod>2015-04-03T19:51:35+02:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   
   <url>
     <loc>http://blog.minicom.nl/</loc>
-    <lastmod>2015-03-20T16:17:34+01:00</lastmod>
+    <lastmod>2015-04-03T19:51:35+02:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
